@@ -1,0 +1,42 @@
+window.onload = function() {
+    var httpRequest;
+    var loginForm = document.getElementById("loginForm");
+
+    loginForm.onsubmit = function(event) {
+        event.preventDefault();
+
+        httpRequest = new XMLHttpRequest();
+
+        if (!httpRequest) {
+            alert('Nu s-a putut crea o instanță XMLHTTP!');
+            return false;
+        }
+
+        httpRequest.onreadystatechange = verificaDatele;
+
+        httpRequest.open('GET', 'loginPage.json', true);
+        httpRequest.send();
+    };
+
+    function verificaDatele() {
+        if (httpRequest.readyState === 4) {
+            if (httpRequest.status === 200) {
+                
+                var dateDinServer = JSON.parse(httpRequest.responseText);
+                
+                var userIntrodus = document.getElementById("username").value;
+                var passIntrodus = document.getElementById("password").value;
+
+                if (userIntrodus === dateDinServer.user && passIntrodus === dateDinServer.pass) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = "Playground.html";
+                } else {
+                    document.getElementById("error-msg").style.display = "block";
+                }
+
+            } else {
+                alert('Eroare: Nu s-a putut citi fișierul extern (CORS sau fișier lipsă).');
+            }
+        }
+    }
+};
