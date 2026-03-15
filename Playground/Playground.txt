@@ -1,0 +1,126 @@
+const all_estimation = document.querySelector(".card")
+
+all_estimation.style.backgroundColor = "#2ec6a7";
+
+document.addEventListener("DOMContentLoaded", function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userName = localStorage.getItem('username');
+    const authSection = document.getElementById('auth-section');
+
+    if (isLoggedIn === 'true' && authSection) {
+        authSection.innerHTML = `
+            <div class="user-pill">
+                <div class="user-name"><strong>${userName || 'User'}</strong></div>
+                <button id="logoutBtn" class="logout-mini-btn">Logout</button>
+            </div>
+        `;
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            window.location.reload();
+        });
+    }
+});
+
+
+
+function createNotification(message){
+	const alerta = document.createElement('div');
+	alerta.innerText = message;
+	const r = Math.floor(Math.random() * 255);
+	const g = Math.floor(Math.random() * 255);
+	const b = Math.floor(Math.random() * 255);
+	const randomColor = `rgb(${r}, ${g}, ${b})`;
+	
+	alerta.style.position = "fixed";
+	alerta.style.bottom = "20px";
+	alerta.style.right = "20px";
+	alerta.style.backgroundColor = randomColor;
+	alerta.style.color = "#d5e1eb";
+	alerta.style.padding = "15px 25px";
+    alerta.style.borderRadius = "30px";
+    alerta.style.boxShadow = "0px 4px 10px rgba(0,0,0,0.3)";
+    alerta.style.zIndex = "9999";
+    alerta.style.fontFamily = "sans-serif";
+    alerta.style.fontWeight = "bold";
+	
+	document.body.appendChild(alerta);
+	
+	setTimeout(() => { alerta.remove();}, 5000);
+}
+
+const searchInput = document.getElementById('modelSearch');
+const allCards = document.querySelectorAll(".part");
+
+console.log("Input găsit:", searchInput);
+
+const cautareSalvata = localStorage.getItem('ultimaCautare');
+if (cautareSalvata && searchInput) {
+    searchInput.value = cautareSalvata;
+}
+
+if(searchInput){
+	searchInput.addEventListener('keydown', function(element_){
+		if(element_.key === 'Enter'){
+			element_.preventDefault();
+			const searchedText = element_.target.value.toLowerCase().trim();
+			//console.log(searchedText);
+			let found = false;
+			
+			allCards.forEach(card => {
+				const titluCard = card.innerText.toLowerCase();
+				
+				if(titluCard.includes(searchedText) && searchedText !== ""){
+					card.scrollIntoView({behavior: 'smooth', block: 'center'});
+					found = true;
+				}
+			});
+			if(found){
+				createNotification("Found!");
+				localStorage.setItem('ultimaCautare', searchedText);
+			}
+			else{
+				createNotification("Not found!");
+			}
+		}
+	});
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const cards = document.querySelectorAll('.cards');
+    let currentIndex = 0;
+
+    function setActiveCard(index) {
+        cards.forEach(card => card.classList.remove('active'));
+        
+        if (index >= 0 && index < cards.length) {
+            cards[index].classList.add('active');
+            cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            currentIndex = index;
+        }
+    }
+
+    cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            setActiveCard(index);
+        });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') {
+            let nextIndex = (currentIndex + 1) % cards.length;
+            setActiveCard(nextIndex);
+        } 
+        else if (e.key === 'ArrowLeft') {
+            let prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+            setActiveCard(prevIndex);
+        }
+    });
+});
+
+barcelona_card = document.getElementsByClassName('cards')[1];
+barcelona_card.addEventListener('click', function(){
+	console.log("Barcelona");
+	window.location.href = 'calculator.html';
+});
