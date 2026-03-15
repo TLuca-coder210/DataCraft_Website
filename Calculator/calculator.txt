@@ -1,0 +1,36 @@
+//document.addEventListener("DOMContentLoaded", function () {
+window.onload=function(){
+    const surface_coeff = 4785.474953413134;
+    const rooms_coeff = -260.67199658159575;
+    const neighborhood_coeff = -5568.11861957847;
+    const intercept = -21009.5843966307;
+
+    function updatePrice(surface, rooms, neighborhood) {
+        let price = surface * surface_coeff + rooms * rooms_coeff + neighborhood * neighborhood_coeff + intercept;
+        const resultDiv = document.getElementById('result-display');
+        const priceSpan = document.getElementById('final-price');
+        console.log(resultDiv);
+        console.log(priceSpan);
+        if (resultDiv && priceSpan) {
+            
+            priceSpan.innerHTML = price.toLocaleString();
+            
+            console.log("Calcul nou efectuat:", price);
+        }
+    }
+
+    const surfaceInput = document.getElementById('surface');
+    const roomsInput = document.getElementById('rooms');
+    const neighborhoodInput = document.getElementById('neighborhood');
+
+    const submit = document.getElementById("propertyForm");
+    if(submit){
+        submit.addEventListener('submit', function(event){
+            event.preventDefault();
+            let surface = Number(document.getElementById('surface').value);
+            let rooms = Number(document.getElementById('rooms').value);
+            let neighborhood = Number(document.getElementById('neighborhood').value);
+            updatePrice(surface, rooms, neighborhood);
+        });
+    }
+};
