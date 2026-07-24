@@ -1,12 +1,12 @@
 # DataCraft Website
 
-**DataCraft** is an AI-powered real estate analytics and forecasting platform designed to provide accurate valuation estimates and market insights for multiple major cities across Europe.
+**DataCraft** is an AI-powered real estate analytics and forecasting project designed to explore accurate valuation estimates and market insights for major cities across Europe.
 
 ---
 
 ## Project Overview
 
-The main objective of DataCraft is to leverage Machine Learning and Artificial Intelligence to analyze real estate trends, predict property valuations, and offer predictive forecasting for buyers, investors, and market analysts.
+The main objective of DataCraft is to leverage Machine Learning and Artificial Intelligence to analyze real estate trends, predict property valuations, and offer predictive forecasting models for buyers, investors, and market analysts.
 
 ---
 
@@ -23,7 +23,7 @@ The main objective of DataCraft is to leverage Machine Learning and Artificial I
   * **Predictive Forecasting:** Training models on diverse real estate datasets to forecast future property value trends across European cities (starting with initial regression baselines).
 
 ### Internal Real Estate Search Engine (Active Development)
-* Building a dedicated, high-performance search engine module.
+* Building a dedicated, high-performance search engine module within the project.
 * Designed to enable fast, accurate, and relevant in-app searches for properties, market reports, and city-specific analytics.
 
 ---
