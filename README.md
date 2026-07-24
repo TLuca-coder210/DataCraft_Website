@@ -12,6 +12,8 @@ The main objective of DataCraft is to leverage Machine Learning and Artificial I
 
 ## Current Project Status
 
+Note: The code for this project may not be fully available now, due to active development. Every piece of code will be published when finished.
+
 ### Front-End Development (In Progress - Major Milestones Reached)
 * A significant portion of the user interface and user experience (UI/UX) has been built.
 * Modular layouts including landing pages, custom interactive components, calculator interfaces, and authentication views are established.
